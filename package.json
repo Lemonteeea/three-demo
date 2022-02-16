@@ -26,6 +26,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^7.17.0",
+    "lil-gui": "^0.16.1",
     "prettier": "^2.4.0",
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.2",

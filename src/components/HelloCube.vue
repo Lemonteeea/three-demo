@@ -1,29 +1,28 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import * as THREE from "three";
-import { adjustRender } from "../utils/3dtools";
+import {
+  AmbientLight,
+  DirectionalLight,
+  BoxGeometry,
+  MeshPhongMaterial,
+  Mesh,
+} from "three";
+import { adjustRender, commonRender } from "../utils/3dtools";
 const canvas = ref(null as null | HTMLCanvasElement);
 onMounted(() => {
-  const el = canvas.value as HTMLCanvasElement;
-  const renderer = new THREE.WebGLRenderer({
-    canvas: el,
-  });
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    el.clientWidth / el.clientHeight,
-    0.1,
-    1000
+  const { renderer, scene, camera } = commonRender(
+    canvas.value as HTMLCanvasElement
   );
   camera.position.z = 5;
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-  const geometry = new THREE.BoxGeometry();
-  const material = new THREE.MeshPhongMaterial({
+  const ambientLight = new AmbientLight(0xffffff, 1);
+  const directionalLight = new DirectionalLight(0xffffff, 1);
+  scene.add(ambientLight, directionalLight);
+  const geometry = new BoxGeometry();
+  const material = new MeshPhongMaterial({
     color: 0x0dbc79,
   });
-  const cube = new THREE.Mesh(geometry, material);
-  scene.add(cube, ambientLight, directionalLight);
+  const cube = new Mesh(geometry, material);
+  scene.add(cube);
   function animate(time: number) {
     cube.rotation.x = time / 2;
     cube.rotation.y = time / 2;
@@ -35,10 +34,3 @@ onMounted(() => {
 <template>
   <canvas ref="canvas"></canvas>
 </template>
-
-<style scoped>
-canvas {
-  height: 100%;
-  width: 100%;
-}
-</style>
