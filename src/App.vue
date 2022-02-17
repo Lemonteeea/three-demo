@@ -34,7 +34,7 @@ Reflect.ownKeys(guiObj).forEach((key) => {
 </script>
 
 <template>
-  <component :is="curr"></component>
+  <component :is="curr" :gui="gui"></component>
 </template>
 
 <style>
