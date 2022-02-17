@@ -4,9 +4,10 @@
 import HelloCube from "./components/HelloCube.vue";
 import SolarSystem from "./components/SolarSystem.vue";
 import LoaderTest from "./components/LoaderTest.vue";
+import ShadowTest from "./components/ShadowTest.vue";
 import GUI from "lil-gui";
 import { ref } from "vue";
-const scenes = [{ HelloCube }, { SolarSystem }, { LoaderTest }];
+const scenes = [{ HelloCube }, { SolarSystem }, { LoaderTest }, { ShadowTest }];
 const curr = ref(scenes[0].HelloCube);
 const gui = new GUI();
 const guiObj = {};

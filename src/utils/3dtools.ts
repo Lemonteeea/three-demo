@@ -1,10 +1,11 @@
 import { WebGLRenderer, Scene, PerspectiveCamera } from "three";
-import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 export function adjustRender(
   renderer: WebGLRenderer,
   scene: Scene,
   camera: PerspectiveCamera,
-  beforeRender?: (time: number) => void
+  beforeRender?: (time: number) => void,
+  useOrbitControl = true
 ) {
   function resizeRendererToDisplaySize(renderer: WebGLRenderer) {
     const canvas = renderer.domElement;
@@ -16,8 +17,14 @@ export function adjustRender(
     }
     return needResize;
   }
+  let control: OrbitControls;
+  if (useOrbitControl) {
+    control = new OrbitControls(camera, renderer.domElement);
+    control.enableDamping = true;
+  }
   function render(time: number) {
     time *= 0.001;
+    control?.update();
     beforeRender && beforeRender(time);
     renderer.render(scene, camera);
     if (resizeRendererToDisplaySize(renderer)) {
@@ -31,7 +38,11 @@ export function adjustRender(
 }
 
 export function commonRender(canvas: HTMLCanvasElement) {
-  const renderer = new WebGLRenderer({ canvas: canvas });
+  const renderer = new WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+    precision: "highp",
+  });
   const scene = new Scene();
   const camera = new PerspectiveCamera(
     75,
@@ -40,13 +51,4 @@ export function commonRender(canvas: HTMLCanvasElement) {
     1000
   );
   return { renderer, scene, camera };
-}
-
-export function loadGLTF(url: string) {
-  return new Promise((resolve: (value: GLTF) => void) => {
-    const loader = new GLTFLoader();
-    loader.load(url, (gltf) => {
-      resolve(gltf);
-    });
-  });
 }

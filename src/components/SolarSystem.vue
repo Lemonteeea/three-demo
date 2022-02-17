@@ -14,15 +14,16 @@ onMounted(() => {
   const { renderer, scene, camera } = commonRender(
     canvas.value as HTMLCanvasElement
   );
-  camera.position.z = 30;
-  const ambientLight = new AmbientLight(0xffffff, 1);
+  camera.position.z = 40;
+  const ambientLight = new AmbientLight(0xffffff, 0.5);
   const pointLight = new PointLight(0xffffff, 2);
   scene.add(ambientLight, pointLight);
   // 太阳、地球、月亮共用这个几何体
-  const sphereGeometry = new SphereGeometry(1, 4, 4);
+  const sphereGeometry = new SphereGeometry(1, 16, 8);
   // 添加太阳和太阳系
   const sunMaterial = new MeshPhongMaterial({
-    color: 0xff7700,
+    color: 0xff0000,
+    emissive: 0xff7700,
   });
   const sun = new Mesh(sphereGeometry, sunMaterial);
   sun.scale.set(5, 5, 5);
