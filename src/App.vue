@@ -5,9 +5,16 @@ import HelloCube from "./components/HelloCube.vue";
 import SolarSystem from "./components/SolarSystem.vue";
 import LoaderTest from "./components/LoaderTest.vue";
 import ShadowTest from "./components/ShadowTest.vue";
+import BackgroundTest from "./components/BackgroundTest.vue";
 import GUI from "lil-gui";
 import { ref } from "vue";
-const scenes = [{ HelloCube }, { SolarSystem }, { LoaderTest }, { ShadowTest }];
+const scenes = [
+  { HelloCube },
+  { SolarSystem },
+  { LoaderTest },
+  { ShadowTest },
+  { BackgroundTest },
+];
 const curr = ref(scenes[0].HelloCube);
 const gui = new GUI();
 const guiObj = {};
