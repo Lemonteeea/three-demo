@@ -9,7 +9,7 @@ import {
   TextureLoader,
   WebGLCubeRenderTarget,
 } from "three";
-import { adjustRender, commonRender } from "../../utils/3dtools";
+import { adjustRender, commonRender } from "@/utils/3dtools";
 const canvas = ref(null as null | HTMLCanvasElement);
 onMounted(async () => {
   const { renderer, scene, camera } = commonRender(

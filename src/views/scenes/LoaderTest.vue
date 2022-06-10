@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { AmbientLight, AnimationMixer, Clock, DirectionalLight } from "three";
-import { adjustRender, commonRender } from "../../utils/3dtools";
+import { adjustRender, commonRender } from "@/utils/3dtools";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { useGui } from "../../hooks/gui";
+import { useGui } from "@/hooks/gui";
 const modelUrl = "https://project.kivisense.com/tmp-assets/skateboarder.glb";
 const canvas = ref(null as null | HTMLCanvasElement);
 const gui = useGui();

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import routes from "../routes";
+import routes from "@/routes";
 import { useRouter } from "vue-router";
 import HelloCube from "./scenes/HelloCube.vue";
-import { useGui } from "../hooks/gui";
+import { useGui } from "@/hooks/gui";
 
 const router = useRouter();
 
