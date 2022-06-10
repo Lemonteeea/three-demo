@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { AmbientLight, AnimationMixer, Clock, DirectionalLight } from "three";
-import { adjustRender, commonRender } from "../utils/3dtools";
+import { adjustRender, commonRender } from "../../utils/3dtools";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import GUI from "lil-gui";
+import { useGui } from "../../hooks/gui";
 const modelUrl = "https://project.kivisense.com/tmp-assets/skateboarder.glb";
 const canvas = ref(null as null | HTMLCanvasElement);
-const props = defineProps<{
-  gui: GUI;
-}>();
+const gui = useGui();
 onMounted(async () => {
   const clock = new Clock();
   const canvasEl = canvas.value as HTMLCanvasElement;
@@ -19,7 +17,6 @@ onMounted(async () => {
   scene.add(ambientLight, directionalLight);
   const loader = new GLTFLoader();
   const gltf = await loader.loadAsync(modelUrl);
-  console.log(gltf);
   const model = gltf.scene;
   model.scale.set(10, 10, 10);
   scene.add(model);
@@ -34,7 +31,7 @@ onMounted(async () => {
   });
 
   // GUI
-  const folder = props.gui.addFolder("动画切换");
+  const folder = gui.addFolder("动画切换");
   const guiObj = {};
   gltf.animations.forEach((animation, index) => {
     Reflect.set(guiObj, animation.name, () => {

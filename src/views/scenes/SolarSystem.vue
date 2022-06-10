@@ -8,7 +8,7 @@ import {
   Mesh,
   Object3D,
 } from "three";
-import { adjustRender, commonRender } from "../utils/3dtools";
+import { adjustRender, commonRender } from "../../utils/3dtools";
 const canvas = ref(null as null | HTMLCanvasElement);
 onMounted(() => {
   const { renderer, scene, camera } = commonRender(
