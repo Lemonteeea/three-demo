@@ -1,11 +1,15 @@
 import { WebGLRenderer, Scene, PerspectiveCamera } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+interface AdjustRenderOptions {
+  beforeRender?: (time: number) => void;
+  afterRender?: (time: number) => void;
+  useOrbitControl?: boolean;
+}
 export function adjustRender(
   renderer: WebGLRenderer,
   scene: Scene,
   camera: PerspectiveCamera,
-  beforeRender?: (time: number) => void,
-  useOrbitControl = true
+  { beforeRender, afterRender, useOrbitControl = true }: AdjustRenderOptions
 ) {
   function resizeRendererToDisplaySize(renderer: WebGLRenderer) {
     const canvas = renderer.domElement;
@@ -27,6 +31,7 @@ export function adjustRender(
     control?.update();
     beforeRender && beforeRender(time);
     renderer.render(scene, camera);
+    afterRender && afterRender(time);
     if (resizeRendererToDisplaySize(renderer)) {
       const canvas = renderer.domElement;
       camera.aspect = canvas.clientWidth / canvas.clientHeight;

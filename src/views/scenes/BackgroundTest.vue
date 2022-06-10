@@ -55,7 +55,7 @@ onMounted(async () => {
     cube.rotation.x = time / 2;
     cube.rotation.y = time / 2;
   }
-  adjustRender(renderer, scene, camera, animate);
+  adjustRender(renderer, scene, camera, { beforeRender: animate });
 });
 </script>
 

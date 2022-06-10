@@ -26,8 +26,10 @@ onMounted(async () => {
     mixer.stopAllAction();
     mixer.clipAction(gltf.animations[index]).play();
   }
-  adjustRender(renderer, scene, camera, () => {
-    mixer.update(clock.getDelta());
+  adjustRender(renderer, scene, camera, {
+    beforeRender: () => {
+      mixer.update(clock.getDelta());
+    },
   });
 
   // GUI

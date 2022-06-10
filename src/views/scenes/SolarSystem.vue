@@ -55,7 +55,7 @@ onMounted(() => {
       obj.rotation.z = time / 2;
     });
   }
-  adjustRender(renderer, scene, camera, animate);
+  adjustRender(renderer, scene, camera, { beforeRender: animate });
 });
 </script>
 

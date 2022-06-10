@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { GlitchPass } from "three/examples/jsm/postprocessing/GlitchPass.js";
 import {
   AmbientLight,
   DirectionalLight,
@@ -14,11 +17,18 @@ import {
   PCFSoftShadowMap,
 } from "three";
 import { adjustRender, commonRender } from "@/utils/3dtools";
+
 const canvas = ref(null as null | HTMLCanvasElement);
 onMounted(async () => {
   const { renderer, scene, camera } = commonRender(
     canvas.value as HTMLCanvasElement
   );
+  const composer = new EffectComposer(renderer);
+  const renderPass = new RenderPass(scene, camera);
+  composer.addPass(renderPass);
+  const glitchPass = new GlitchPass();
+  composer.addPass(glitchPass);
+
   camera.position.y = 5;
   camera.position.z = 10;
   camera.lookAt(0, 0, 0);
@@ -62,7 +72,10 @@ onMounted(async () => {
     cube.rotation.x = time / 2;
     cube.rotation.y = time / 2;
   }
-  adjustRender(renderer, scene, camera, { beforeRender: animate });
+  adjustRender(renderer, scene, camera, {
+    beforeRender: animate,
+    afterRender: () => composer.render(),
+  });
 });
 </script>
 
