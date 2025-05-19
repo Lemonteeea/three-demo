@@ -1,33 +1,35 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
+import { useRoute, useRouter } from 'vue-router'
 
-import { useRouter, useRoute } from "vue-router";
-
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-const router = useRouter();
-const route = useRoute();
+const router = useRouter()
+const route = useRoute()
 function handleBack() {
-  router.replace("/");
+  router.replace('/')
 }
 </script>
 
 <template>
-  <button v-if="route.path !== '/'" @click="handleBack" class="back">
+  <button v-if="route.path !== '/'" class="back" @click="handleBack">
     back
   </button>
-  <router-view></router-view>
+  <router-view />
 </template>
 
 <style>
 html,
 body,
 #app {
+  width: 100%;
   height: 100%;
+  padding: 0;
   margin: 0;
 }
 canvas {
+  display: block;
   width: 100%;
   height: 100%;
+  padding: 0;
+  margin: 0;
 }
 .back {
   position: absolute;
@@ -36,10 +38,10 @@ canvas {
 }
 button {
   padding: 1vw 3vw;
+  font-size: 2rem;
   color: #ffffff;
-  font-size: 4vw;
+  outline: none;
   background-color: transparent;
   border: none;
-  outline: none;
 }
 </style>

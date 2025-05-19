@@ -1,10 +1,11 @@
-import GUI from "lil-gui";
-import { onUnmounted } from "vue";
+import GUI from 'lil-gui'
+import { onUnmounted } from 'vue'
+
 export function useGui() {
-  const gui = new GUI();
+  const gui = new GUI()
   onUnmounted(() => {
-    console.log("unmounted");
-    gui.destroy();
-  });
-  return gui;
+    console.log('unmounted')
+    gui.destroy()
+  })
+  return gui
 }

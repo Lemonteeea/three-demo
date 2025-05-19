@@ -1,35 +1,30 @@
-import HelloCube from "@/views/scenes/HelloCube.vue";
-import SolarSystem from "@/views/scenes/SolarSystem.vue";
-import LoaderTest from "@/views/scenes/LoaderTest.vue";
-import ShadowTest from "@/views/scenes/ShadowTest.vue";
-import BackgroundTest from "@/views/scenes/BackgroundTest.vue";
-import PostProcessing from "@/views/scenes/PostProcessing.vue";
-import Home from "@/views/Home.vue";
-import { RouteRecordRaw } from "vue-router";
+import type { RouteRecordRaw } from 'vue-router'
+import Home from '@/views/Home.vue'
+
 export default [
-  { path: "/", component: Home },
+  { path: '/', component: Home },
   {
-    path: "/hello-cube",
-    component: HelloCube,
+    path: '/hello-cube',
+    component: () => import('@/views/scenes/HelloCube.vue'),
   },
   {
-    path: "/solar-system",
-    component: SolarSystem,
+    path: '/solar-system',
+    component: () => import('@/views/scenes/SolarSystem.vue'),
   },
   {
-    path: "/loader-test",
-    component: LoaderTest,
+    path: '/loader-test',
+    component: () => import('@/views/scenes/LoaderTest.vue'),
   },
   {
-    path: "/shadow-test",
-    component: ShadowTest,
+    path: '/shadow-test',
+    component: () => import('@/views/scenes/ShadowTest.vue'),
   },
   {
-    path: "/background-test",
-    component: BackgroundTest,
+    path: '/background-test',
+    component: () => import('@/views/scenes/BackgroundTest.vue'),
   },
   {
-    path: "/post-processing",
-    component: PostProcessing,
+    path: '/post-processing',
+    component: () => import('@/views/scenes/PostProcessing.vue'),
   },
-] as RouteRecordRaw[];
+] as RouteRecordRaw[]
